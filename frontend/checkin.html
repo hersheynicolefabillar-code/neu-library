@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEU Library – Check In</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body { background: #dce8f5; }
+
+    .ci-topbar {
+      background: #1a3a8c;
+      padding: 14px 28px;
+      text-align: center;
+    }
+    .ci-topbar-title {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    .ci-body {
+      min-height: calc(100vh - 52px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .ci-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 2.5rem 2.5rem 2rem;
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .ci-logo {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    .ci-hello {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+
+    .ci-subtitle {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 1.75rem;
+    }
+
+    .ci-form-group {
+      margin-bottom: 1.1rem;
+      text-align: left;
+    }
+
+    .ci-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .ci-select {
+      width: 100%;
+      padding: 11px 36px 11px 14px;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: 'Source Sans 3', sans-serif;
+      color: #444;
+      background: #f5f5f5;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .ci-select:focus {
+      outline: none;
+      border-color: #1a3a8c;
+      background-color: #fff;
+    }
+
+    .ci-btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 1.75rem;
+      justify-content: center;
+    }
+
+    .ci-btn-submit {
+      background: #1a3a8c;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 32px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: 'Source Sans 3', sans-serif;
+      cursor: pointer;
+      transition: background 0.15s;
+      min-width: 140px;
+    }
+    .ci-btn-submit:hover { background: #122970; }
+    .ci-btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .ci-btn-logout {
+      background: #c0392b;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 32px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: 'Source Sans 3', sans-serif;
+      cursor: pointer;
+      transition: background 0.15s;
+      min-width: 120px;
+    }
+    .ci-btn-logout:hover { background: #a93226; }
+
+    .ci-alert {
+      background: #fdecea;
+      color: #c0392b;
+      border: 1px solid #f5c6c2;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: none;
+      text-align: left;
+    }
+    .ci-alert.show { display: block; }
+
+    /* ── SUCCESS CARD ─────────────────────────────────── */
+    .success-topbar {
+      background: #1a3a8c;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .success-topbar-title { color: #fff; font-weight: 700; font-size: 1rem; }
+
+    .success-body {
+      min-height: calc(100vh - 52px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background: #dce8f5;
+    }
+
+    .success-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 2.5rem 2.5rem 2rem;
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+    }
+
+    .success-check {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #d4edda;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.1rem;
+    }
+
+    .success-title {
+      font-family: 'Merriweather', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1a3a8c;
+      margin-bottom: 0.25rem;
+    }
+
+    .success-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1.25rem;
+    }
+
+    .success-info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    .success-info-table td {
+      padding: 7px 10px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .success-info-table td:first-child {
+      font-weight: 700;
+      color: #666;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      width: 38%;
+    }
+    .success-info-table td:last-child { color: #222; }
+
+    .success-btn-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── CHECK-IN VIEW ───────────────────────────────────────── -->
+<div id="view-checkin">
+
+  <div class="ci-topbar">
+    <span class="ci-topbar-title">NEU Library Visitor Management System</span>
+  </div>
+
+  <div class="ci-body">
+    <div class="ci-card">
+
+      <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo" class="ci-logo" />
+
+      <div class="ci-hello" id="greeting-name">Hello!</div>
+      <div class="ci-subtitle">Library Check-In</div>
+
+      <div id="checkin-alert" class="ci-alert"></div>
+
+      <form id="checkin-form" novalidate>
+
+        <div class="ci-form-group">
+          <label class="ci-label" for="ci-college">College</label>
+          <select class="ci-select" id="ci-college" required>
+            <option value="">Select College</option>
+          </select>
+        </div>
+
+        <div class="ci-form-group">
+          <label class="ci-label" for="ci-course">Course</label>
+          <select class="ci-select" id="ci-course">
+            <option value="">Select Course</option>
+          </select>
+        </div>
+
+        <div class="ci-form-group">
+          <label class="ci-label" for="ci-purpose">Purpose</label>
+          <select class="ci-select" id="ci-purpose" required>
+            <option value="">Select Purpose</option>
+          </select>
+        </div>
+
+        <div class="ci-btn-row">
+          <button class="ci-btn-submit" id="submit-btn" type="submit">Submit Visit</button>
+          <button class="ci-btn-logout" id="logout-btn" type="button">Logout</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ── SUCCESS / WELCOME VIEW ─────────────────────────────── -->
+<div id="view-success" style="display:none;">
+
+  <div class="success-topbar">
+    <span class="success-topbar-title">NEU Library Visitor Management System</span>
+    <button class="ci-btn-logout" id="logout-success-btn"
+            style="padding:6px 18px;font-size:0.82rem;">Logout</button>
+  </div>
+
+  <div class="success-body">
+    <div class="success-card">
+
+      <div class="success-check">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"
+             stroke="#1e8449" stroke-width="2.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+
+      <div class="success-title">Welcome to NEU Library!</div>
+      <div class="success-name" id="success-name"></div>
+
+      <table class="success-info-table">
+        <tr id="row-student-id">
+          <td>Student ID</td>
+          <td id="s-student-id"></td>
+        </tr>
+        <tr>
+          <td>College</td>
+          <td id="s-college"></td>
+        </tr>
+        <tr id="row-course">
+          <td>Course</td>
+          <td id="s-course"></td>
+        </tr>
+        <tr id="row-year">
+          <td>Year Level</td>
+          <td id="s-year"></td>
+        </tr>
+        <tr>
+          <td>Purpose</td>
+          <td id="s-purpose"></td>
+        </tr>
+        <tr>
+          <td>Date &amp; Time</td>
+          <td id="s-time"></td>
+        </tr>
+      </table>
+
+      <div class="success-btn-row">
+        <button class="ci-btn-submit" id="checkin-again-btn">Check In Again</button>
+        <button class="ci-btn-logout" id="logout-success-btn-2">Logout</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<script src="js/app.js"></script>
+<script>
+  /* ── Guard ──────────────────────────────────────────────── */
+  (function () {
+    if (!Auth.isLoggedIn()) { Auth.redirect('index.html'); return; }
+    const u = Auth.getUser();
+    if (u?.role === 'admin') { Auth.redirect('admin.html'); return; }
+  })();
+
+  const user = Auth.getUser();
+
+  /* ── Greet ──────────────────────────────────────────────── */
+  document.getElementById('greeting-name').textContent = 'Hello, ' + (user?.fullName || '');
+
+  /* ── Populate dropdowns ─────────────────────────────────── */
+  populateSelect('ci-college', COLLEGES, 'Select College');
+  populateSelect('ci-purpose', PURPOSES, 'Select Purpose');
+
+  /* ── Pre-fill college & course from registration ────────── */
+  if (user?.college) {
+    const colSel = document.getElementById('ci-college');
+    colSel.value = user.college;
+    const courses = COURSES_BY_COLLEGE[user.college] || [];
+    if (courses.length) {
+      populateSelect('ci-course', courses, 'Select Course');
+      setTimeout(() => {
+        if (user?.course) document.getElementById('ci-course').value = user.course;
+      }, 30);
+    }
+  }
+
+  /* ── College → Course cascade ───────────────────────────── */
+  document.getElementById('ci-college').addEventListener('change', function () {
+    const courses = COURSES_BY_COLLEGE[this.value] || [];
+    populateSelect('ci-course', courses, 'Select Course');
+  });
+
+  /* ── Alert helpers ──────────────────────────────────────── */
+  function showErr(msg) {
+    const el = document.getElementById('checkin-alert');
+    el.textContent = msg; el.classList.add('show');
+  }
+  function hideErr() {
+    document.getElementById('checkin-alert').classList.remove('show');
+  }
+
+  /* ── Logout ─────────────────────────────────────────────── */
+  function doLogout() { Auth.clear(); Auth.redirect('index.html'); }
+  document.getElementById('logout-btn').addEventListener('click', doLogout);
+  document.getElementById('logout-success-btn').addEventListener('click', doLogout);
+  document.getElementById('logout-success-btn-2').addEventListener('click', doLogout);
+
+  /* ── Check In Again ─────────────────────────────────────── */
+  document.getElementById('checkin-again-btn').addEventListener('click', () => {
+    document.getElementById('view-success').style.display = 'none';
+    document.getElementById('view-checkin').style.display = '';
+    document.getElementById('ci-purpose').value = '';
+    hideErr();
+  });
+
+  /* ── Submit ─────────────────────────────────────────────── */
+  document.getElementById('checkin-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    hideErr();
+
+    const college = document.getElementById('ci-college').value;
+    const course  = document.getElementById('ci-course').value;
+    const purpose = document.getElementById('ci-purpose').value;
+
+    if (!college) { showErr('Please select your college.'); return; }
+    if (!purpose) { showErr('Please select your purpose of visit.'); return; }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true; btn.textContent = 'Submitting...';
+
+    try {
+      await API.post('/visits', { college, course, purpose });
+
+      /* Fill success table */
+      document.getElementById('success-name').textContent = user?.fullName || '';
+      document.getElementById('s-college').textContent   = college;
+      document.getElementById('s-purpose').textContent   = purpose;
+      document.getElementById('s-time').textContent      =
+        new Date().toLocaleString('en-PH', { dateStyle: 'full', timeStyle: 'short' });
+
+      /* Student ID */
+      if (user?.studentId) {
+        document.getElementById('s-student-id').textContent = user.studentId;
+        document.getElementById('row-student-id').style.display = '';
+      } else {
+        document.getElementById('row-student-id').style.display = 'none';
+      }
+
+      /* Course */
+      if (course) {
+        document.getElementById('s-course').textContent = course;
+        document.getElementById('row-course').style.display = '';
+      } else {
+        document.getElementById('row-course').style.display = 'none';
+      }
+
+      /* Year Level */
+      if (user?.yearLevel) {
+        document.getElementById('s-year').textContent = user.yearLevel;
+        document.getElementById('row-year').style.display = '';
+      } else {
+        document.getElementById('row-year').style.display = 'none';
+      }
+
+      document.getElementById('view-checkin').style.display = 'none';
+      document.getElementById('view-success').style.display = '';
+
+    } catch (err) {
+      showErr(err.message);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Submit Visit';
+    }
+  });
+</script>
+</body>
+</html>
