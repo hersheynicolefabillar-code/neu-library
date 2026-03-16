@@ -2,12 +2,22 @@ require('dotenv').config();
 const supabase = require('./config/db');
 
 const COLLEGES = [
-  'College of Informatics and Computing Studies (CICS)',
-  'College of Nursing (CON)',
-  'College of Engineering (COE)',
-  'College of Business and Accountancy (CBA)',
-  'College of Education (CED)',
+  'College of Accountancy (COA)',
+  'College of Agriculture (CA)',
   'College of Arts and Sciences (CAS)',
+  'College of Business Administration (CBA)',
+  'College of Communication (COC)',
+  'College of Informatics and Computing Studies (CICS)',
+  'College of Criminology',
+  'College of Education (CED)',
+  'College of Engineering and Architecture (CEA)',
+  'College of Medical Technology (CMT)',
+  'College of Midwifery (CMW)',
+  'College of Music (COM)',
+  'College of Nursing (CON)',
+  'College of Physical Therapy (CPT)',
+  'College of Respiratory Therapy (CRT)',
+  'Graduate School',
 ];
 
 const PURPOSES = [
