@@ -4,12 +4,7 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors({ 
-  origin: [
-    'https://https://neu-library-ruddy.vercel.app/',
-    'http://127.0.0.1:5500'
-  ] 
-}));
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // Routes

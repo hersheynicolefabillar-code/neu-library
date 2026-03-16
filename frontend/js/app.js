@@ -3,7 +3,7 @@
    Shared utilities: API wrapper, auth state, constants
    ============================================================ */
 
-const API_BASE = 'https://neu-library-backend.onrender.com';
+const API_BASE = 'https://neu-library-backend.onrender.com/api';
 
 // ── Auth helpers ─────────────────────────────────────────────
 const Auth = {
