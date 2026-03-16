@@ -1,55 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>NEU Library – Admin</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    body{background:linear-gradient(140deg,#0a1840 0%,#1a3a8c 45%,#0d2158 100%);min-height:100vh;}
+  </style>
 </head>
-<body class="glass-page" style="display:block;">
-  <div class="deco-circle"></div>
-  <div class="deco-circle2"></div>
+<body>
+<div class="deco3"></div><div class="deco4"></div>
 
 <div class="admin-layout">
-
   <aside class="sidebar">
     <div class="sidebar-header">
-      <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo"
-           style="width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);
-                  object-fit:contain;background:rgba(255,255,255,0.95);padding:3px;
-                  display:block;margin:0 auto 8px;" />
+      <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo" class="sidebar-logo"/>
       <div class="sidebar-title">NEU Library</div>
       <div class="sidebar-sub">Admin Panel</div>
     </div>
-
     <nav class="sidebar-nav">
       <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-          <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         Dashboard
       </button>
       <button class="nav-item" data-tab="logs" onclick="switchTab('logs')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
-          <rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
         Visitor Logs
       </button>
       <button class="nav-item" data-tab="users" onclick="switchTab('users')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <circle cx="12" cy="8" r="3"/><path d="M6 20v-1a6 6 0 0112 0v1"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3"/><path d="M6 20v-1a6 6 0 0112 0v1"/></svg>
         User Management
       </button>
     </nav>
-
     <div class="sidebar-footer">
       <button class="nav-item" id="sidebar-logout">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"/></svg>
         Sign Out
       </button>
     </div>
@@ -60,21 +46,19 @@
       <span class="admin-topbar-title" id="topbar-label">Dashboard</span>
       <span class="admin-topbar-date" id="topbar-date"></span>
     </div>
-
     <div class="admin-content">
 
-      <!-- DASHBOARD -->
       <div class="tab-panel active" id="tab-dashboard">
         <div class="filter-tabs">
-          <button class="filter-tab active" data-filter="day"   onclick="setFilter('day')">Day</button>
-          <button class="filter-tab"        data-filter="week"  onclick="setFilter('week')">Week</button>
-          <button class="filter-tab"        data-filter="month" onclick="setFilter('month')">Month</button>
+          <button class="filter-tab active" data-filter="day" onclick="setFilter('day')">Day</button>
+          <button class="filter-tab" data-filter="week" onclick="setFilter('week')">Week</button>
+          <button class="filter-tab" data-filter="month" onclick="setFilter('month')">Month</button>
         </div>
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-label">Total Visitors</div>
             <div class="stat-value" id="stat-total">—</div>
-            <div class="stat-sub"   id="stat-total-sub">this day</div>
+            <div class="stat-sub" id="stat-sub">this day</div>
           </div>
           <div class="stat-card gold">
             <div class="stat-label">Today's Check-ins</div>
@@ -83,12 +67,12 @@
           </div>
           <div class="stat-card green">
             <div class="stat-label">Top College</div>
-            <div class="stat-value sm" id="stat-top-college" style="color:#aaffcc">—</div>
+            <div class="stat-value sm" id="stat-college" style="color:#aaffcc">—</div>
             <div class="stat-sub">most visitors</div>
           </div>
           <div class="stat-card red">
             <div class="stat-label">Top Purpose</div>
-            <div class="stat-value xsm" id="stat-top-purpose" style="color:#ffaaaa">—</div>
+            <div class="stat-value xsm" id="stat-purpose" style="color:#ffaaaa">—</div>
             <div class="stat-sub">most common</div>
           </div>
         </div>
@@ -104,12 +88,11 @@
         </div>
       </div>
 
-      <!-- LOGS -->
       <div class="tab-panel" id="tab-logs">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:10px;">
+        <div style="margin-bottom:1rem;">
           <div class="search-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            <input type="text" id="log-search" placeholder="Search by name or email..." />
+            <input type="text" id="log-search" placeholder="Search by name or email..."/>
           </div>
         </div>
         <div class="table-wrap">
@@ -118,15 +101,14 @@
             <tbody id="logs-body"></tbody>
           </table>
         </div>
-        <div id="logs-pagination" style="display:flex;align-items:center;gap:10px;margin-top:1rem;font-size:0.82rem;color:rgba(255,255,255,0.5);"></div>
+        <div class="pagination" id="logs-pagination"></div>
       </div>
 
-      <!-- USERS -->
       <div class="tab-panel" id="tab-users">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:10px;">
+        <div style="margin-bottom:1rem;">
           <div class="search-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            <input type="text" id="user-search" placeholder="Search users..." />
+            <input type="text" id="user-search" placeholder="Search users..."/>
           </div>
         </div>
         <div class="table-wrap">
@@ -143,144 +125,117 @@
 
 <script src="js/app.js"></script>
 <script>
-  (function () {
-    if (!Auth.isLoggedIn()) { Auth.redirect('index.html'); return; }
-    const user = Auth.getUser();
-    if (user?.role !== 'admin') { Auth.redirect('checkin.html'); return; }
-  })();
+(function(){
+  if(!Auth.isLoggedIn()){Auth.redirect('index.html');return;}
+  if(Auth.getUser()?.role!=='admin'){Auth.redirect('checkin.html');return;}
+})();
 
-  document.getElementById('topbar-date').textContent =
-    new Date().toLocaleDateString('en-PH', { dateStyle: 'full' });
+document.getElementById('topbar-date').textContent=new Date().toLocaleDateString('en-PH',{dateStyle:'full'});
+const TAB={dashboard:'Dashboard',logs:'Visitor Logs',users:'User Management'};
 
-  const TAB_LABELS = { dashboard: 'Dashboard', logs: 'Visitor Logs', users: 'User Management' };
+function switchTab(n){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  document.querySelectorAll('.nav-item[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===n));
+  document.getElementById('topbar-label').textContent=TAB[n];
+  if(n==='dashboard')loadStats();
+  if(n==='logs')loadLogs(1);
+  if(n==='users')loadUsers();
+}
+document.getElementById('sidebar-logout').addEventListener('click',()=>{Auth.clear();Auth.redirect('index.html');});
 
-  function switchTab(name) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
-    document.querySelectorAll('.nav-item[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
-    document.getElementById('topbar-label').textContent = TAB_LABELS[name];
-    if (name === 'dashboard') loadStats();
-    if (name === 'logs')      loadLogs(1);
-    if (name === 'users')     loadUsers();
-  }
-
-  document.getElementById('sidebar-logout').addEventListener('click', () => { Auth.clear(); Auth.redirect('index.html'); });
-
-  let currentFilter = 'day';
-  function setFilter(f) {
-    currentFilter = f;
-    document.querySelectorAll('.filter-tab').forEach(b => b.classList.toggle('active', b.dataset.filter === f));
-    document.getElementById('stat-total-sub').textContent = 'this ' + f;
-    loadStats();
-  }
-
-  async function loadStats() {
-    try {
-      const { stats } = await API.get('/admin/stats?filter=' + currentFilter);
-      document.getElementById('stat-total').textContent   = stats.totalVisitors;
-      document.getElementById('stat-today').textContent   = stats.todayVisits;
-      const topCollege = Object.entries(stats.byCollege || {}).sort((a,b)=>b[1]-a[1])[0];
-      document.getElementById('stat-top-college').textContent = topCollege ? shortCollege(topCollege[0]) : '—';
-      document.getElementById('stat-top-purpose').textContent = stats.topPurpose || '—';
-      renderBars('chart-college', stats.byCollege || {}, false);
-      renderBars('chart-purpose', stats.byPurpose || {}, true);
-    } catch (err) { console.error('Stats error:', err.message); }
-  }
-
-  function renderBars(containerId, dataObj, gold) {
-    const container = document.getElementById(containerId);
-    const entries = Object.entries(dataObj).sort((a,b)=>b[1]-a[1]).slice(0,6);
-    if (!entries.length) { container.innerHTML = '<p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">No data yet</p>'; return; }
-    const max = entries[0][1];
-    container.innerHTML = entries.map(([k,v]) => `
-      <div class="bar-row">
-        <div class="bar-label"><span>${shortCollege(k)}</span><span>${v}</span></div>
-        <div class="bar-track"><div class="bar-fill${gold?'':' navy'}" style="width:${Math.round(v/max*100)}%"></div></div>
-      </div>`).join('');
-  }
-
-  let logPage = 1, logSearch = '', logTotal = 0, logPages = 1;
-  const LOG_LIMIT = 20;
-  let logSearchTimer;
-  document.getElementById('log-search').addEventListener('input', function () {
-    clearTimeout(logSearchTimer);
-    logSearchTimer = setTimeout(() => { logSearch = this.value.trim(); loadLogs(1); }, 300);
-  });
-
-  async function loadLogs(page) {
-    logPage = page;
-    try {
-      const q = `/admin/logs?search=${encodeURIComponent(logSearch)}&page=${page}&limit=${LOG_LIMIT}`;
-      const { visits, total, pages } = await API.get(q);
-      logTotal = total; logPages = pages;
-      const tbody = document.getElementById('logs-body');
-      if (!visits.length) {
-        tbody.innerHTML = `<tr><td colspan="6" class="td-empty">No records found</td></tr>`;
-      } else {
-        tbody.innerHTML = visits.map(v => `
-          <tr>
-            <td class="td-name">${esc(v.full_name)}</td>
-            <td class="td-muted">${esc(v.email)}</td>
-            <td>${shortCollege(v.college)}</td>
-            <td>${esc(v.course || '—')}</td>
-            <td>${esc(v.purpose)}</td>
-            <td class="td-muted">${new Date(v.check_in_time).toLocaleString('en-PH')}</td>
-          </tr>`).join('');
-      }
-      renderLogsPagination();
-    } catch (err) { console.error('Logs error:', err.message); }
-  }
-
-  function renderLogsPagination() {
-    const el = document.getElementById('logs-pagination');
-    if (logPages <= 1) { el.innerHTML = ''; return; }
-    el.innerHTML = `
-      <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage-1})" ${logPage<=1?'disabled':''}>← Prev</button>
-      <span>Page ${logPage} of ${logPages} &nbsp;(${logTotal} records)</span>
-      <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage+1})" ${logPage>=logPages?'disabled':''}>Next →</button>`;
-  }
-
-  let userSearch = '', userSearchTimer;
-  document.getElementById('user-search').addEventListener('input', function () {
-    clearTimeout(userSearchTimer);
-    userSearchTimer = setTimeout(() => { userSearch = this.value.trim(); loadUsers(); }, 300);
-  });
-
-  async function loadUsers() {
-    try {
-      const { users } = await API.get('/admin/users?search=' + encodeURIComponent(userSearch));
-      const tbody = document.getElementById('users-body');
-      if (!users.length) {
-        tbody.innerHTML = `<tr><td colspan="7" class="td-empty">No users found</td></tr>`;
-        return;
-      }
-      tbody.innerHTML = users.map(u => `
-        <tr>
-          <td class="td-name">${esc(u.fullName)}</td>
-          <td class="td-muted">${esc(u.email)}</td>
-          <td><span class="badge badge-${u.role}">${u.role}</span></td>
-          <td>${shortCollege(u.college)}</td>
-          <td>${u.visitCount}</td>
-          <td><span class="badge badge-${u.status}">${u.status}</span></td>
-          <td>
-            <button class="btn btn-sm ${u.status==='active'?'btn-red':'btn-green'}" onclick="toggleBan('${u.id}')">
-              ${u.status === 'active' ? 'Ban' : 'Unban'}
-            </button>
-          </td>
-        </tr>`).join('');
-    } catch (err) { console.error('Users error:', err.message); }
-  }
-
-  async function toggleBan(id) {
-    try { await API.patch(`/admin/users/${id}/ban`); loadUsers(); }
-    catch (err) { alert('Failed: ' + err.message); }
-  }
-
-  function esc(str) {
-    return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
+let filter='day';
+function setFilter(f){
+  filter=f;
+  document.querySelectorAll('.filter-tab').forEach(b=>b.classList.toggle('active',b.dataset.filter===f));
+  document.getElementById('stat-sub').textContent='this '+f;
   loadStats();
+}
+
+async function loadStats(){
+  try{
+    const{stats}=await API.get('/admin/stats?filter='+filter);
+    document.getElementById('stat-total').textContent=stats.totalVisitors;
+    document.getElementById('stat-today').textContent=stats.todayVisits;
+    const top=Object.entries(stats.byCollege||{}).sort((a,b)=>b[1]-a[1])[0];
+    document.getElementById('stat-college').textContent=top?shortCollege(top[0]):'—';
+    document.getElementById('stat-purpose').textContent=stats.topPurpose||'—';
+    renderBars('chart-college',stats.byCollege||{},true);
+    renderBars('chart-purpose',stats.byPurpose||{},false);
+  }catch(e){console.error(e);}
+}
+
+function renderBars(id,data,gold){
+  const el=document.getElementById(id);
+  const entries=Object.entries(data).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  if(!entries.length){el.innerHTML='<p style="color:rgba(255,255,255,0.3);font-size:0.8rem;">No data yet</p>';return;}
+  const max=entries[0][1];
+  el.innerHTML=entries.map(([k,v])=>`
+    <div class="bar-row">
+      <div class="bar-label"><span>${shortCollege(k)}</span><span>${v}</span></div>
+      <div class="bar-track"><div class="bar-fill${gold?'':' white'}" style="width:${Math.round(v/max*100)}%"></div></div>
+    </div>`).join('');
+}
+
+let logPage=1,logSearch='',logTotal=0,logPages=1;
+let logTimer;
+document.getElementById('log-search').addEventListener('input',function(){
+  clearTimeout(logTimer);logTimer=setTimeout(()=>{logSearch=this.value.trim();loadLogs(1);},300);
+});
+
+async function loadLogs(page){
+  logPage=page;
+  try{
+    const{visits,total,pages}=await API.get(`/admin/logs?search=${encodeURIComponent(logSearch)}&page=${page}&limit=20`);
+    logTotal=total;logPages=pages;
+    const tb=document.getElementById('logs-body');
+    tb.innerHTML=visits.length?visits.map(v=>`
+      <tr>
+        <td class="td-name">${esc(v.full_name)}</td>
+        <td class="td-muted">${esc(v.email)}</td>
+        <td>${shortCollege(v.college)}</td>
+        <td>${esc(v.course||'—')}</td>
+        <td>${esc(v.purpose)}</td>
+        <td class="td-muted">${new Date(v.check_in_time).toLocaleString('en-PH')}</td>
+      </tr>`).join(''):`<tr><td colspan="6" class="td-empty">No records found</td></tr>`;
+    const pg=document.getElementById('logs-pagination');
+    pg.innerHTML=logPages>1?`
+      <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage-1})" ${logPage<=1?'disabled':''}>← Prev</button>
+      <span>Page ${logPage} of ${logPages} (${logTotal} records)</span>
+      <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage+1})" ${logPage>=logPages?'disabled':''}>Next →</button>`:'';
+  }catch(e){console.error(e);}
+}
+
+let userSearch='',userTimer;
+document.getElementById('user-search').addEventListener('input',function(){
+  clearTimeout(userTimer);userTimer=setTimeout(()=>{userSearch=this.value.trim();loadUsers();},300);
+});
+
+async function loadUsers(){
+  try{
+    const{users}=await API.get('/admin/users?search='+encodeURIComponent(userSearch));
+    const tb=document.getElementById('users-body');
+    tb.innerHTML=users.length?users.map(u=>`
+      <tr>
+        <td class="td-name">${esc(u.fullName)}</td>
+        <td class="td-muted">${esc(u.email)}</td>
+        <td><span class="badge badge-${u.role}">${u.role}</span></td>
+        <td>${shortCollege(u.college)}</td>
+        <td>${u.visitCount}</td>
+        <td><span class="badge badge-${u.status}">${u.status}</span></td>
+        <td><button class="btn btn-sm ${u.status==='active'?'btn-red':'btn-green'}" onclick="toggleBan('${u.id}')">${u.status==='active'?'Ban':'Unban'}</button></td>
+      </tr>`).join(''):`<tr><td colspan="7" class="td-empty">No users found</td></tr>`;
+  }catch(e){console.error(e);}
+}
+
+async function toggleBan(id){
+  try{await API.patch(`/admin/users/${id}/ban`);loadUsers();}
+  catch(e){alert('Failed: '+e.message);}
+}
+
+function esc(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+loadStats();
 </script>
 </body>
 </html>

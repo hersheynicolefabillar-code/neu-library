@@ -1,202 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>NEU Library – Check In</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-<!-- ── CHECK-IN VIEW ──────────────────────────────────────── -->
-<div id="view-checkin" class="glass-page checkin-page">
-  <div class="deco-circle"></div>
-  <div class="deco-circle2"></div>
-
+<div id="view-checkin" class="page">
+  <div class="deco3"></div><div class="deco4"></div>
   <div class="topbar">
     <span class="topbar-title">NEU Library Visitor Management System</span>
     <button class="btn btn-red btn-sm" id="logout-btn">Logout</button>
   </div>
-
   <main class="checkin-body">
     <div class="glass-card checkin-card">
       <div class="checkin-logo-row">
-        <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo" class="neu-logo" style="width:80px;height:80px;" />
+        <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo" class="neu-logo" style="width:80px;height:80px;"/>
         <div class="checkin-greeting" id="greeting-name">Hello!</div>
         <div class="checkin-sub" id="greeting-info"></div>
         <div class="checkin-sub">Library Check-In</div>
       </div>
-
       <div id="checkin-alert" class="alert alert-error"></div>
-
       <form id="checkin-form" novalidate>
         <div class="form-group">
-          <label class="form-label" for="ci-college">College</label>
-          <select class="form-control" id="ci-college" required>
-            <option value="">Select College</option>
-          </select>
+          <label class="form-label">College</label>
+          <select class="form-control" id="ci-college" required><option value="">Select College</option></select>
         </div>
         <div class="form-group">
-          <label class="form-label" for="ci-course">Course</label>
-          <select class="form-control" id="ci-course">
-            <option value="">Select Course</option>
-          </select>
+          <label class="form-label">Course</label>
+          <select class="form-control" id="ci-course"><option value="">Select Course</option></select>
         </div>
         <div class="form-group">
-          <label class="form-label" for="ci-purpose">Purpose of Visit</label>
-          <select class="form-control" id="ci-purpose" required>
-            <option value="">Select Purpose</option>
-          </select>
+          <label class="form-label">Purpose of Visit</label>
+          <select class="form-control" id="ci-purpose" required><option value="">Select Purpose</option></select>
         </div>
         <div class="btn-row">
-          <button class="btn btn-gold" id="submit-btn" type="submit" style="flex:1;">
-            Submit Visit
-          </button>
+          <button class="btn btn-gold" id="submit-btn" type="submit" style="flex:1;">Submit Visit</button>
           <button class="btn btn-red" id="logout-btn-2" type="button">Logout</button>
         </div>
       </form>
     </div>
   </main>
-
   <footer class="page-footer">© 2026 New Era University Library</footer>
 </div>
 
-
-<!-- ── SUCCESS VIEW ───────────────────────────────────────── -->
-<div id="view-success" class="glass-page success-page" style="display:none;">
-  <div class="deco-circle"></div>
-  <div class="deco-circle2"></div>
-
+<div id="view-success" class="page" style="display:none;">
+  <div class="deco3"></div><div class="deco4"></div>
   <div class="topbar">
     <span class="topbar-title">NEU Library Visitor Management System</span>
     <button class="btn btn-red btn-sm" id="logout-success-btn">Logout</button>
   </div>
-
   <main class="success-body">
     <div class="glass-card success-card">
       <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo"
            style="width:72px;height:72px;border-radius:50%;border:3px solid var(--gold);
-                  object-fit:contain;background:rgba(255,255,255,0.95);padding:4px;
-                  display:block;margin:0 auto 1rem;" />
-
+                  object-fit:contain;background:rgba(255,255,255,0.96);padding:4px;
+                  display:block;margin:0 auto 1rem;"/>
       <div class="success-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
-             stroke="#aaffcc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#aaffcc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>
-
       <div class="success-title">Welcome to NEU Library!</div>
       <div class="success-name" id="success-name"></div>
-
-      <table class="success-info-table">
-        <tr id="row-student-id">
-          <td>Student ID</td><td id="s-student-id"></td>
-        </tr>
-        <tr>
-          <td>College</td><td id="s-college"></td>
-        </tr>
-        <tr id="row-course">
-          <td>Course</td><td id="s-course"></td>
-        </tr>
-        <tr id="row-year">
-          <td>Year Level</td><td id="s-year"></td>
-        </tr>
-        <tr>
-          <td>Purpose</td><td id="s-purpose"></td>
-        </tr>
-        <tr>
-          <td>Date &amp; Time</td><td id="s-time"></td>
-        </tr>
+      <table class="success-table">
+        <tr id="row-sid"><td>Student ID</td><td id="s-sid"></td></tr>
+        <tr><td>College</td><td id="s-college"></td></tr>
+        <tr id="row-course"><td>Course</td><td id="s-course"></td></tr>
+        <tr id="row-year"><td>Year Level</td><td id="s-year"></td></tr>
+        <tr><td>Purpose</td><td id="s-purpose"></td></tr>
+        <tr><td>Date &amp; Time</td><td id="s-time"></td></tr>
       </table>
-
-      <div class="success-btn-row">
+      <div style="display:flex;gap:12px;justify-content:center;">
         <button class="btn btn-glass" id="checkin-again-btn" style="flex:1;">Check In Again</button>
-        <button class="btn btn-red"   id="logout-success-btn-2" style="flex:1;">Logout</button>
+        <button class="btn btn-red" id="logout-success-btn-2" style="flex:1;">Logout</button>
       </div>
     </div>
   </main>
-
   <footer class="page-footer">© 2026 New Era University Library</footer>
 </div>
 
-
 <script src="js/app.js"></script>
 <script>
-  (function () {
-    if (!Auth.isLoggedIn()) { Auth.redirect('index.html'); return; }
-    const u = Auth.getUser();
-    if (u?.role === 'admin') { Auth.redirect('admin.html'); return; }
-  })();
+(function(){
+  if(!Auth.isLoggedIn()){Auth.redirect('index.html');return;}
+  const u=Auth.getUser();
+  if(u?.role==='admin'){Auth.redirect('admin.html');return;}
+})();
 
-  const user = Auth.getUser();
-  document.getElementById('greeting-name').textContent = 'Hello, ' + (user?.fullName || '');
-  const infoEl = document.getElementById('greeting-info');
-  if (user?.studentId) infoEl.textContent = 'Student ID: ' + user.studentId;
-  else if (user?.role === 'faculty') infoEl.textContent = 'Faculty Member';
+const user=Auth.getUser();
+document.getElementById('greeting-name').textContent='Hello, '+(user?.fullName||'');
+const info=document.getElementById('greeting-info');
+if(user?.studentId)info.textContent='Student ID: '+user.studentId;
+else if(user?.role==='faculty')info.textContent='Faculty Member';
 
-  populateSelect('ci-college', COLLEGES, 'Select College');
-  populateSelect('ci-purpose', PURPOSES, 'Select Purpose');
+populateSelect('ci-college',COLLEGES,'Select College');
+populateSelect('ci-purpose',PURPOSES,'Select Purpose');
 
-  if (user?.college) {
-    const colSel = document.getElementById('ci-college');
-    colSel.value = user.college;
-    const courses = COURSES_BY_COLLEGE[user.college] || [];
-    if (courses.length) {
-      populateSelect('ci-course', courses, 'Select Course');
-      document.getElementById('ci-course').disabled = false;
-      if (user?.course) setTimeout(() => { document.getElementById('ci-course').value = user.course; }, 30);
-    }
-  }
+if(user?.college){
+  const s=document.getElementById('ci-college');
+  s.value=user.college;
+  const c=COURSES_BY_COLLEGE[user.college]||[];
+  if(c.length){populateSelect('ci-course',c,'Select Course');document.getElementById('ci-course').disabled=false;}
+  if(user?.course)setTimeout(()=>{document.getElementById('ci-course').value=user.course;},30);
+}
+document.getElementById('ci-college').addEventListener('change',function(){
+  const c=COURSES_BY_COLLEGE[this.value]||[];
+  populateSelect('ci-course',c,'Select Course');
+  document.getElementById('ci-course').disabled=c.length===0;
+});
 
-  document.getElementById('ci-college').addEventListener('change', function () {
-    const courses = COURSES_BY_COLLEGE[this.value] || [];
-    populateSelect('ci-course', courses, 'Select Course');
-    document.getElementById('ci-course').disabled = courses.length === 0;
-  });
+function doLogout(){Auth.clear();Auth.redirect('index.html');}
+document.getElementById('logout-btn').addEventListener('click',doLogout);
+document.getElementById('logout-btn-2').addEventListener('click',doLogout);
+document.getElementById('logout-success-btn').addEventListener('click',doLogout);
+document.getElementById('logout-success-btn-2').addEventListener('click',doLogout);
 
-  function doLogout() { Auth.clear(); Auth.redirect('index.html'); }
-  document.getElementById('logout-btn').addEventListener('click', doLogout);
-  document.getElementById('logout-btn-2').addEventListener('click', doLogout);
-  document.getElementById('logout-success-btn').addEventListener('click', doLogout);
-  document.getElementById('logout-success-btn-2').addEventListener('click', doLogout);
+document.getElementById('checkin-again-btn').addEventListener('click',()=>{
+  document.getElementById('view-success').style.display='none';
+  document.getElementById('view-checkin').style.display='';
+  document.getElementById('ci-purpose').value='';
+});
 
-  document.getElementById('checkin-again-btn').addEventListener('click', () => {
-    document.getElementById('view-success').style.display = 'none';
-    document.getElementById('view-checkin').style.display = '';
-    document.getElementById('ci-purpose').value = '';
-  });
-
-  document.getElementById('checkin-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    hideAlert('checkin-alert');
-    const college = document.getElementById('ci-college').value;
-    const course  = document.getElementById('ci-course').value;
-    const purpose = document.getElementById('ci-purpose').value;
-    if (!college) { showAlert('checkin-alert', 'Please select your college.'); return; }
-    if (!purpose) { showAlert('checkin-alert', 'Please select your purpose of visit.'); return; }
-    const btn = document.getElementById('submit-btn');
-    btn.disabled = true; btn.textContent = 'Submitting...';
-    try {
-      await API.post('/visits', { college, course, purpose });
-      document.getElementById('success-name').textContent = user?.fullName || '';
-      document.getElementById('s-college').textContent   = college;
-      document.getElementById('s-purpose').textContent   = purpose;
-      document.getElementById('s-time').textContent      = new Date().toLocaleString('en-PH', { dateStyle: 'full', timeStyle: 'short' });
-      document.getElementById('row-student-id').style.display = user?.studentId ? '' : 'none';
-      if (user?.studentId) document.getElementById('s-student-id').textContent = user.studentId;
-      document.getElementById('row-course').style.display = course ? '' : 'none';
-      if (course) document.getElementById('s-course').textContent = course;
-      document.getElementById('row-year').style.display = user?.yearLevel ? '' : 'none';
-      if (user?.yearLevel) document.getElementById('s-year').textContent = user.yearLevel;
-      document.getElementById('view-checkin').style.display = 'none';
-      document.getElementById('view-success').style.display = '';
-    } catch (err) {
-      showAlert('checkin-alert', err.message);
-    } finally {
-      btn.disabled = false; btn.textContent = 'Submit Visit';
-    }
-  });
+document.getElementById('checkin-form').addEventListener('submit',async function(e){
+  e.preventDefault();hideAlert('checkin-alert');
+  const college=document.getElementById('ci-college').value;
+  const course=document.getElementById('ci-course').value;
+  const purpose=document.getElementById('ci-purpose').value;
+  if(!college){showAlert('checkin-alert','Please select your college.');return;}
+  if(!purpose){showAlert('checkin-alert','Please select your purpose of visit.');return;}
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true;btn.textContent='Submitting...';
+  try{
+    await API.post('/visits',{college,course,purpose});
+    document.getElementById('success-name').textContent=user?.fullName||'';
+    document.getElementById('s-college').textContent=college;
+    document.getElementById('s-purpose').textContent=purpose;
+    document.getElementById('s-time').textContent=new Date().toLocaleString('en-PH',{dateStyle:'full',timeStyle:'short'});
+    document.getElementById('row-sid').style.display=user?.studentId?'':'none';
+    if(user?.studentId)document.getElementById('s-sid').textContent=user.studentId;
+    document.getElementById('row-course').style.display=course?'':'none';
+    if(course)document.getElementById('s-course').textContent=course;
+    document.getElementById('row-year').style.display=user?.yearLevel?'':'none';
+    if(user?.yearLevel)document.getElementById('s-year').textContent=user.yearLevel;
+    document.getElementById('view-checkin').style.display='none';
+    document.getElementById('view-success').style.display='';
+  }catch(err){showAlert('checkin-alert',err.message);}
+  finally{btn.disabled=false;btn.textContent='Submit Visit';}
+});
 </script>
 </body>
 </html>

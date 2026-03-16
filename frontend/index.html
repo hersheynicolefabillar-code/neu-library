@@ -1,237 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>NEU Library – Sign In</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-<!-- ── LOGIN VIEW ─────────────────────────────────────────── -->
-<div id="view-login" class="glass-page auth-page">
-  <div class="deco-circle"></div>
-  <div class="deco-circle2"></div>
-
+<div id="view-login" class="page">
+  <div class="deco3"></div><div class="deco4"></div>
   <header class="neu-header">
-    <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo" class="neu-logo" />
+    <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo" class="neu-logo"/>
     <h1>New Era University Library</h1>
     <p class="subtitle">Visitor Management System</p>
   </header>
-
   <main class="auth-body">
     <div class="glass-card auth-card">
       <div id="login-alert" class="alert alert-error"></div>
-
       <form id="login-form" novalidate>
         <div class="form-group">
-          <label class="form-label" for="login-email">Institutional Email</label>
-          <input class="form-control" type="email" id="login-email"
-                 placeholder="yourname@neu.edu.ph" required />
+          <label class="form-label">Institutional Email</label>
+          <input class="form-control" type="email" id="login-email" placeholder="yourname@neu.edu.ph" required/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="login-password">Password</label>
-          <input class="form-control" type="password" id="login-password"
-                 placeholder="Enter password..." required />
+          <label class="form-label">Password</label>
+          <input class="form-control" type="password" id="login-password" placeholder="Enter password..." required/>
         </div>
-        <button class="btn btn-gold btn-block" id="login-btn" type="submit" style="margin-top:8px;">
-          Sign In
-        </button>
+        <button class="btn btn-gold btn-block" id="login-btn" type="submit" style="margin-top:8px;">Sign In</button>
       </form>
-
       <div class="divider">Don't have an account yet?</div>
-
-      <button class="btn btn-glass btn-block" id="goto-register-btn">
-        Register Here
-      </button>
+      <button class="btn btn-glass btn-block" id="goto-register-btn">Register Here</button>
     </div>
   </main>
-
   <footer class="page-footer">© 2026 New Era University Library</footer>
 </div>
 
-
-<!-- ── REGISTER VIEW ──────────────────────────────────────── -->
-<div id="view-register" class="glass-page auth-page" style="display:none;">
-  <div class="deco-circle"></div>
-  <div class="deco-circle2"></div>
-
+<div id="view-register" class="page" style="display:none;">
+  <div class="deco3"></div><div class="deco4"></div>
   <header class="neu-header">
-    <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo" class="neu-logo" />
+    <img src="https://neu.edu.ph/main/img/neu.png" alt="NEU Logo" class="neu-logo"/>
     <h1>New Era University Library</h1>
     <p class="subtitle">Visitor Management System</p>
   </header>
-
   <main class="auth-body">
     <div class="glass-card auth-card" style="max-width:480px;">
       <h2>Create an Account</h2>
-
       <div class="role-toggle">
         <button class="role-btn active" id="role-student" type="button">Student</button>
-        <button class="role-btn"        id="role-faculty" type="button">Faculty</button>
+        <button class="role-btn" id="role-faculty" type="button">Faculty</button>
       </div>
-
       <div id="register-alert" class="alert alert-error"></div>
-
       <form id="register-form" novalidate>
         <div class="form-group">
-          <label class="form-label" for="reg-name">Full Name</label>
-          <input class="form-control" type="text" id="reg-name"
-                 placeholder="e.g. Juan Dela Cruz" required />
+          <label class="form-label">Full Name</label>
+          <input class="form-control" type="text" id="reg-name" placeholder="e.g. Juan Dela Cruz" required/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="reg-email">Institutional Email</label>
-          <input class="form-control" type="email" id="reg-email"
-                 placeholder="yourname@neu.edu.ph" required />
+          <label class="form-label">Institutional Email</label>
+          <input class="form-control" type="email" id="reg-email" placeholder="yourname@neu.edu.ph" required/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="reg-password">Password</label>
-          <input class="form-control" type="password" id="reg-password"
-                 placeholder="Create a password (min 6 characters)" required minlength="6" />
+          <label class="form-label">Password</label>
+          <input class="form-control" type="password" id="reg-password" placeholder="Create a password (min 6 characters)" required minlength="6"/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="reg-confirm-password">Confirm Password</label>
-          <input class="form-control" type="password" id="reg-confirm-password"
-                 placeholder="Re-enter your password" required />
+          <label class="form-label">Confirm Password</label>
+          <input class="form-control" type="password" id="reg-confirm-password" placeholder="Re-enter your password" required/>
         </div>
         <div class="form-group" id="student-id-group">
-          <label class="form-label" for="reg-student-id">Student ID Number</label>
-          <input class="form-control" type="text" id="reg-student-id"
-                 placeholder="e.g. 2021-00123" />
+          <label class="form-label">Student ID Number</label>
+          <input class="form-control" type="text" id="reg-student-id" placeholder="e.g. 2021-00123"/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="reg-contact">Contact Number</label>
-          <input class="form-control" type="tel" id="reg-contact"
-                 placeholder="e.g. 09171234567" />
+          <label class="form-label">Contact Number</label>
+          <input class="form-control" type="tel" id="reg-contact" placeholder="e.g. 09171234567"/>
         </div>
         <div class="form-group">
-          <label class="form-label" for="reg-college">College / Program</label>
+          <label class="form-label">College / Program</label>
           <select class="form-control" id="reg-college" required>
             <option value="">Select your college...</option>
           </select>
         </div>
         <div class="form-group" id="course-group">
-          <label class="form-label" for="reg-course">Course</label>
+          <label class="form-label">Course</label>
           <select class="form-control" id="reg-course">
             <option value="">Select course...</option>
           </select>
         </div>
         <div class="form-group" id="year-group">
-          <label class="form-label" for="reg-year">Year Level</label>
+          <label class="form-label">Year Level</label>
           <select class="form-control" id="reg-year">
             <option value="">Select year level...</option>
-            <option value="1st Year">1st Year</option>
-            <option value="2nd Year">2nd Year</option>
-            <option value="3rd Year">3rd Year</option>
-            <option value="4th Year">4th Year</option>
-            <option value="5th Year">5th Year</option>
+            <option>1st Year</option><option>2nd Year</option>
+            <option>3rd Year</option><option>4th Year</option><option>5th Year</option>
           </select>
         </div>
-        <button class="btn btn-gold btn-block" id="register-btn" type="submit" style="margin-top:12px;">
-          Complete Registration
-        </button>
+        <button class="btn btn-gold btn-block" id="register-btn" type="submit" style="margin-top:12px;">Complete Registration</button>
       </form>
-
       <div style="text-align:center;margin-top:1rem;font-size:0.85rem;">
-        <a id="back-to-login" href="#" style="color:var(--gold);font-weight:700;">
-          ← Back to Login
-        </a>
+        <a id="back-to-login" href="#" style="color:var(--gold);font-weight:700;">← Back to Login</a>
       </div>
     </div>
   </main>
-
   <footer class="page-footer">© 2026 New Era University Library</footer>
 </div>
 
-
 <script src="js/app.js"></script>
 <script>
-  (function () {
-    if (Auth.isLoggedIn()) {
-      const user = Auth.getUser();
-      Auth.redirect(user?.role === 'admin' ? 'admin.html' : 'checkin.html');
-    }
-  })();
+(function(){
+  if(Auth.isLoggedIn()){const u=Auth.getUser();Auth.redirect(u?.role==='admin'?'admin.html':'checkin.html');}
+})();
 
-  populateSelect('reg-college', COLLEGES, 'Select your college...');
+populateSelect('reg-college',COLLEGES,'Select your college...');
+let selectedRole='student';
 
-  let selectedRole = 'student';
-  document.getElementById('role-student').addEventListener('click', function () {
-    selectedRole = 'student';
-    this.classList.add('active');
-    document.getElementById('role-faculty').classList.remove('active');
-    document.getElementById('course-group').style.display   = 'block';
-    document.getElementById('year-group').style.display     = 'block';
-    document.getElementById('student-id-group').style.display = 'block';
-  });
-  document.getElementById('role-faculty').addEventListener('click', function () {
-    selectedRole = 'faculty';
-    this.classList.add('active');
-    document.getElementById('role-student').classList.remove('active');
-    document.getElementById('course-group').style.display   = 'none';
-    document.getElementById('year-group').style.display     = 'none';
-    document.getElementById('student-id-group').style.display = 'none';
-  });
+document.getElementById('role-student').addEventListener('click',function(){
+  selectedRole='student';this.classList.add('active');
+  document.getElementById('role-faculty').classList.remove('active');
+  document.getElementById('course-group').style.display='block';
+  document.getElementById('year-group').style.display='block';
+  document.getElementById('student-id-group').style.display='block';
+});
+document.getElementById('role-faculty').addEventListener('click',function(){
+  selectedRole='faculty';this.classList.add('active');
+  document.getElementById('role-student').classList.remove('active');
+  document.getElementById('course-group').style.display='none';
+  document.getElementById('year-group').style.display='none';
+  document.getElementById('student-id-group').style.display='none';
+});
+document.getElementById('reg-college').addEventListener('change',function(){
+  populateSelect('reg-course',COURSES_BY_COLLEGE[this.value]||[],'Select course...');
+});
+function showView(n){
+  document.getElementById('view-login').style.display=n==='login'?'':'none';
+  document.getElementById('view-register').style.display=n==='register'?'':'none';
+}
+document.getElementById('goto-register-btn').addEventListener('click',()=>showView('register'));
+document.getElementById('back-to-login').addEventListener('click',e=>{e.preventDefault();showView('login');});
 
-  document.getElementById('reg-college').addEventListener('change', function () {
-    const courses = COURSES_BY_COLLEGE[this.value] || [];
-    populateSelect('reg-course', courses, 'Select course...');
-  });
+document.getElementById('login-form').addEventListener('submit',async function(e){
+  e.preventDefault();hideAlert('login-alert');
+  const email=document.getElementById('login-email').value.trim();
+  const password=document.getElementById('login-password').value;
+  if(!email.endsWith('@neu.edu.ph')){showAlert('login-alert','Only @neu.edu.ph institutional emails are allowed.');return;}
+  setLoading('login-btn',true,'Sign In','Signing in...');
+  try{
+    const data=await API.post('/auth/login',{email,password});
+    Auth.setSession(data.token,data.user);
+    Auth.redirect(data.user.role==='admin'?'admin.html':'checkin.html');
+  }catch(err){showAlert('login-alert',err.message);setLoading('login-btn',false,'Sign In');}
+});
 
-  function showView(name) {
-    document.getElementById('view-login').style.display    = name === 'login'    ? '' : 'none';
-    document.getElementById('view-register').style.display = name === 'register' ? '' : 'none';
-  }
-  document.getElementById('goto-register-btn').addEventListener('click', () => showView('register'));
-  document.getElementById('back-to-login').addEventListener('click', (e) => { e.preventDefault(); showView('login'); });
-
-  document.getElementById('login-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    hideAlert('login-alert');
-    const email    = document.getElementById('login-email').value.trim();
-    const password = document.getElementById('login-password').value;
-    if (!email.endsWith('@neu.edu.ph')) {
-      showAlert('login-alert', 'Only @neu.edu.ph institutional emails are allowed.');
-      return;
-    }
-    setLoading('login-btn', true, 'Sign In', 'Signing in...');
-    try {
-      const data = await API.post('/auth/login', { email, password });
-      Auth.setSession(data.token, data.user);
-      Auth.redirect(data.user.role === 'admin' ? 'admin.html' : 'checkin.html');
-    } catch (err) {
-      showAlert('login-alert', err.message);
-      setLoading('login-btn', false, 'Sign In');
-    }
-  });
-
-  document.getElementById('register-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    hideAlert('register-alert');
-    const fullName        = document.getElementById('reg-name').value.trim();
-    const email           = document.getElementById('reg-email').value.trim();
-    const password        = document.getElementById('reg-password').value;
-    const confirmPassword = document.getElementById('reg-confirm-password').value;
-    const studentId       = document.getElementById('reg-student-id').value.trim();
-    const contact         = document.getElementById('reg-contact').value.trim();
-    const college         = document.getElementById('reg-college').value;
-    const course          = document.getElementById('reg-course').value;
-    const yearLevel       = document.getElementById('reg-year').value;
-    if (!fullName) { showAlert('register-alert', 'Please enter your full name.'); return; }
-    if (!email.endsWith('@neu.edu.ph')) { showAlert('register-alert', 'Only @neu.edu.ph institutional emails are allowed.'); return; }
-    if (password.length < 6) { showAlert('register-alert', 'Password must be at least 6 characters.'); return; }
-    if (password !== confirmPassword) { showAlert('register-alert', 'Passwords do not match.'); return; }
-    if (!college) { showAlert('register-alert', 'Please select your college / program.'); return; }
-    setLoading('register-btn', true, 'Complete Registration', 'Registering...');
-    try {
-      const data = await API.post('/auth/register', { email, password, fullName, role: selectedRole, college, course, studentId, contact, yearLevel });
-      Auth.setSession(data.token, data.user);
-      Auth.redirect(data.user.role === 'admin' ? 'admin.html' : 'checkin.html');
-    } catch (err) {
-      showAlert('register-alert', err.message);
-      setLoading('register-btn', false, 'Complete Registration');
-    }
-  });
+document.getElementById('register-form').addEventListener('submit',async function(e){
+  e.preventDefault();hideAlert('register-alert');
+  const fullName=document.getElementById('reg-name').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const password=document.getElementById('reg-password').value;
+  const confirmPassword=document.getElementById('reg-confirm-password').value;
+  const studentId=document.getElementById('reg-student-id').value.trim();
+  const contact=document.getElementById('reg-contact').value.trim();
+  const college=document.getElementById('reg-college').value;
+  const course=document.getElementById('reg-course').value;
+  const yearLevel=document.getElementById('reg-year').value;
+  if(!fullName){showAlert('register-alert','Please enter your full name.');return;}
+  if(!email.endsWith('@neu.edu.ph')){showAlert('register-alert','Only @neu.edu.ph institutional emails are allowed.');return;}
+  if(password.length<6){showAlert('register-alert','Password must be at least 6 characters.');return;}
+  if(password!==confirmPassword){showAlert('register-alert','Passwords do not match.');return;}
+  if(!college){showAlert('register-alert','Please select your college / program.');return;}
+  setLoading('register-btn',true,'Complete Registration','Registering...');
+  try{
+    const data=await API.post('/auth/register',{email,password,fullName,role:selectedRole,college,course,studentId,contact,yearLevel});
+    Auth.setSession(data.token,data.user);
+    Auth.redirect(data.user.role==='admin'?'admin.html':'checkin.html');
+  }catch(err){showAlert('register-alert',err.message);setLoading('register-btn',false,'Complete Registration');}
+});
 </script>
 </body>
 </html>
