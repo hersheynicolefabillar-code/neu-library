@@ -25,13 +25,13 @@
       <div id="checkin-alert" class="alert alert-error"></div>
       <form id="checkin-form" novalidate>
         <div class="form-group">
-          <label class="form-label">College</label>
-          <select class="form-control" id="ci-college" required><option value="">Select College</option></select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Course</label>
-          <select class="form-control" id="ci-course"><option value="">Select Course</option></select>
-        </div>
+  <label class="form-label" id="ci-college-label">College</label>
+  <select class="form-control" id="ci-college" required><option value="">Select College</option></select>
+</div>
+<div class="form-group">
+  <label class="form-label" id="ci-course-label">Course</label>
+  <select class="form-control" id="ci-course"><option value="">Select Course</option></select>
+</div>
         <div class="form-group">
           <label class="form-label">Purpose of Visit</label>
           <select class="form-control" id="ci-purpose" required><option value="">Select Purpose</option></select>
@@ -96,17 +96,28 @@ const info=document.getElementById('greeting-info');
 if(user?.studentId)info.textContent='Student ID: '+user.studentId;
 else if(user?.role==='faculty')info.textContent='Faculty Member';
 
-populateSelect('ci-college',COLLEGES,'Select College');
-populateSelect('ci-purpose',PURPOSES,'Select Purpose');
+if(user?.role === 'faculty') {
+  document.getElementById('ci-college-label').textContent = 'DEPARTMENT';
+  document.getElementById('ci-course-label').textContent = 'POSITION';
+  populateSelect('ci-college', DEPARTMENTS, 'Select Department');
+  populateSelect('ci-course', ['Employee', 'Staff', 'Teacher / Professor'], 'Select Position');
+  document.getElementById('ci-course').disabled = false;
+} else {
+  populateSelect('ci-college', COLLEGES, 'Select College');
+}
+populateSelect('ci-purpose', PURPOSES, 'Select Purpose');
 
 if(user?.college){
   const s=document.getElementById('ci-college');
   s.value=user.college;
-  const c=COURSES_BY_COLLEGE[user.college]||[];
-  if(c.length){populateSelect('ci-course',c,'Select Course');document.getElementById('ci-course').disabled=false;}
-  if(user?.course)setTimeout(()=>{document.getElementById('ci-course').value=user.course;},30);
+  if(user?.role !== 'faculty') {
+    const c=COURSES_BY_COLLEGE[user.college]||[];
+    if(c.length){populateSelect('ci-course',c,'Select Course');document.getElementById('ci-course').disabled=false;}
+    if(user?.course)setTimeout(()=>{document.getElementById('ci-course').value=user.course;},30);
+  }
 }
 document.getElementById('ci-college').addEventListener('change',function(){
+  if(user?.role === 'faculty') return;
   const c=COURSES_BY_COLLEGE[this.value]||[];
   populateSelect('ci-course',c,'Select Course');
   document.getElementById('ci-course').disabled=c.length===0;
