@@ -40,40 +40,7 @@ body {
   overflow-x: hidden;
   background: linear-gradient(140deg, #0a1840 0%, #1a3a8c 45%, #0d2158 100%);
 }
-.page::before {
-  content: '';
-  position: fixed;
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  background: rgba(232,160,32,0.15);
-  top: -180px; right: -120px;
-  pointer-events: none; z-index: 0;
-}
-.page::after {
-  content: '';
-  position: fixed;
-  width: 350px; height: 350px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  bottom: -100px; left: -80px;
-  pointer-events: none; z-index: 0;
-}
-.deco3 {
-  position: fixed;
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  background: rgba(232,160,32,0.09);
-  bottom: 100px; right: 60px;
-  pointer-events: none; z-index: 0;
-}
-.deco4 {
-  position: fixed;
-  width: 120px; height: 120px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.05);
-  top: 180px; left: 30px;
-  pointer-events: none; z-index: 0;
-}
+
 
 /* ── Glass card ──────────────────────────────────────────── */
 .glass-card {
