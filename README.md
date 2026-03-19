@@ -6,9 +6,12 @@ A full-stack web application for tracking and managing library visitors at **New
 
 ## 🌐 Live Demo
 
+Admin Username: jcesperanza@neu.edu.ph
+Admin Password: jcesperanza
+
 | Service | URL |
 |---|---|
-| Frontend | https://neu-library.vercel.app |
+| Frontend | https://neu-library-ruddy.vercel.app/ |
 | Backend API | https://neu-library-backend.onrender.com |
 | Database | Supabase (PostgreSQL) |
 
@@ -125,7 +128,7 @@ Open `frontend/index.html` with **Live Server** in VS Code.
 
 | Role | Email | Password |
 |---|---|---|
-| Admin | admin@neu.edu.ph | admin123 |
+| Admin | jcesperanza@neu.edu.ph | jcesperanza |
 | Student | m.santos@neu.edu.ph | password123 |
 | Faculty | l.bautista@neu.edu.ph | password123 |
 

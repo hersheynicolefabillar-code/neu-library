@@ -54,16 +54,16 @@ const seed = async () => {
   // 1. Create admin
   console.log('Creating admin account...');
   try {
-    const adminId = await createAuthUser('admin@neu.edu.ph', 'admin123');
+    const adminId = await createAuthUser('jcesperanza@neu.edu.ph', 'jcesperanza');
     await supabase.from('users').upsert({
       id: adminId,
-      email: 'admin@neu.edu.ph',
+      email: 'jcesperanza@neu.edu.ph',
       full_name: 'Library Administrator',
       role: 'admin',
       college: 'Library',
       status: 'active'
     });
-    console.log('Admin created -> admin@neu.edu.ph / admin123');
+    console.log('  Admin   -> jcesperanza@neu.edu.ph / jcesperanza');
   } catch (e) {
     console.warn('Admin may already exist:', e.message);
   }
@@ -120,7 +120,7 @@ const seed = async () => {
   }
 
   console.log('\nSeed complete!');
-  console.log('  Admin   -> admin@neu.edu.ph / admin123');
+  console.log('  Admin   -> jcesperanza@neu.edu.ph / jcesperanza');
   console.log('  Student -> m.santos@neu.edu.ph / password123');
   console.log('  Faculty -> l.bautista@neu.edu.ph / password123');
   process.exit(0);
