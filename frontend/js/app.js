@@ -84,6 +84,24 @@ const COLLEGES = [
   'College of Respiratory Therapy (CRT)',
   'Graduate School',
 ];
+const DEPARTMENTS = [
+  'Department of Accountancy',
+  'Department of Agriculture',
+  'Department of Arts and Sciences',
+  'Department of Business Administration',
+  'Department of Communication',
+  'Department of Informatics and Computing Studies',
+  'Department of Criminology',
+  'Department of Education',
+  'Department of Engineering and Architecture',
+  'Department of Medical Technology',
+  'Department of Midwifery',
+  'Department of Music',
+  'Department of Nursing',
+  'Department of Physical Therapy',
+  'Department of Respiratory Therapy',
+  'Graduate School',
+];
 
 const COURSES_BY_COLLEGE = {
   'College of Accountancy (COA)':  ['BSA', 'BSBAIS'],

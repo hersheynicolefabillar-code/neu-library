@@ -122,6 +122,7 @@ document.getElementById('role-student').addEventListener('click',function(){
   document.getElementById('year-group').style.display='block';
   document.getElementById('student-id-group').style.display='block';
   document.getElementById('college-label').textContent='COLLEGE / PROGRAM';
+  populateSelect('reg-college', COLLEGES, 'Select your college...');
 });
 document.getElementById('role-faculty').addEventListener('click',function(){
   selectedRole='faculty';this.classList.add('active');
@@ -130,6 +131,7 @@ document.getElementById('role-faculty').addEventListener('click',function(){
   document.getElementById('year-group').style.display='none';
   document.getElementById('student-id-group').style.display='none';
   document.getElementById('college-label').textContent='DEPARTMENT / COLLEGE';
+  populateSelect('reg-college', DEPARTMENTS, 'Select your department...');
 });
 document.getElementById('reg-college').addEventListener('change',function(){
   populateSelect('reg-course',COURSES_BY_COLLEGE[this.value]||[],'Select course...');
