@@ -1,10 +1,10 @@
-# 📚 NEU Library Visitor Management System
+# NEU Library Visitor Management System
 
 A full-stack web application for tracking and managing library visitors at **New Era University**. Built with vanilla HTML/CSS/JavaScript frontend, Node.js + Express backend, and Supabase (PostgreSQL) as the database.
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
 Admin Username: jcesperanza@neu.edu.ph
 Admin Password: jcesperanza
@@ -17,7 +17,7 @@ Admin Password: jcesperanza
 
 ---
 
-## ✨ Features
+## Features
 
 ### For Students & Faculty
 - Register with NEU institutional email (`@neu.edu.ph` only)
@@ -34,7 +34,7 @@ Admin Password: jcesperanza
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -48,7 +48,7 @@ Admin Password: jcesperanza
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 neu-library/
@@ -80,7 +80,7 @@ neu-library/
 
 ---
 
-## 🚀 Local Setup
+## Local Setup
 
 ### Prerequisites
 - Node.js v18+ — https://nodejs.org
@@ -124,7 +124,7 @@ Open `frontend/index.html` with **Live Server** in VS Code.
 
 ---
 
-## 🔑 Default Accounts (after seeding)
+## Default Accounts (after seeding)
 
 | Role | Email | Password |
 |---|---|---|
@@ -134,7 +134,7 @@ Open `frontend/index.html` with **Live Server** in VS Code.
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Authentication
 | Method | Endpoint | Description |
@@ -159,7 +159,7 @@ Open `frontend/index.html` with **Live Server** in VS Code.
 
 ---
 
-## 🔒 Security
+## Security
 
 - Only `@neu.edu.ph` emails are accepted — validated on both frontend and backend
 - Passwords are managed by Supabase Auth (bcrypt internally)
@@ -170,7 +170,7 @@ Open `frontend/index.html` with **Live Server** in VS Code.
 
 ---
 
-## 🗄️ Database Tables
+## Database Tables
 
 ### `users`
 | Column | Type | Description |
@@ -204,7 +204,7 @@ Open `frontend/index.html` with **Live Server** in VS Code.
 
 ---
 
-## 👨‍💻 Development
+## Development
 
 ### Push updates to GitHub
 ```bash
@@ -216,7 +216,7 @@ Vercel and Render will automatically redeploy on every push.
 
 ---
 
-## 📄 License
+## License
 
 This project was developed for **New Era University Library** as a Visitor Management System.
 
