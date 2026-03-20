@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="css/style.css"/>
   <style>
     body{background:linear-gradient(140deg,#0a1840 0%,#1a3a8c 45%,#0d2158 100%);min-height:100vh;}
+    .filter-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:1.25rem;}
+    .filter-select{padding:7px 32px 7px 12px;border-radius:8px;font-size:0.82rem;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.25);background:rgba(0,0,0,0.28);color:rgba(255,255,255,0.85);font-family:'Source Sans 3',sans-serif;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;}
+    .filter-select:focus{outline:none;border-color:var(--gold);}
+    .filter-select option{background:#1a3a8c;color:#fff;}
+    .filter-label{font-size:0.75rem;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;}
+    .filter-group{display:flex;align-items:center;gap:6px;}
+    .reset-btn{padding:7px 14px;border-radius:8px;font-size:0.78rem;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.65);font-family:'Source Sans 3',sans-serif;transition:all 0.15s;}
+    .reset-btn:hover{background:rgba(255,255,255,0.15);color:#fff;}
   </style>
 </head>
 <body>
@@ -48,12 +56,64 @@
     </div>
     <div class="admin-content">
 
+      <!-- DASHBOARD TAB -->
       <div class="tab-panel active" id="tab-dashboard">
-        <div class="filter-tabs">
+
+        <!-- Time filter -->
+        <div class="filter-tabs" style="margin-bottom:1rem;">
           <button class="filter-tab active" data-filter="day" onclick="setFilter('day')">Day</button>
           <button class="filter-tab" data-filter="week" onclick="setFilter('week')">Week</button>
           <button class="filter-tab" data-filter="month" onclick="setFilter('month')">Month</button>
         </div>
+
+        <!-- Additional filters row -->
+        <div class="filter-row">
+          <div class="filter-group">
+            <span class="filter-label">Purpose:</span>
+            <select class="filter-select" id="filter-purpose" onchange="loadStats()">
+              <option value="">All Purposes</option>
+              <option>Study</option>
+              <option>Research</option>
+              <option>Borrowing / Returning Books</option>
+              <option>Use of Computers</option>
+              <option>Group Discussion</option>
+              <option>Thesis / Capstone Work</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">College:</span>
+            <select class="filter-select" id="filter-college" onchange="loadStats()">
+              <option value="">All Colleges</option>
+              <option>College of Accountancy (COA)</option>
+              <option>College of Agriculture (CA)</option>
+              <option>College of Arts and Sciences (CAS)</option>
+              <option>College of Business Administration (CBA)</option>
+              <option>College of Communication (COC)</option>
+              <option>College of Informatics and Computing Studies (CICS)</option>
+              <option>College of Criminology</option>
+              <option>College of Education (CED)</option>
+              <option>College of Engineering and Architecture (CEA)</option>
+              <option>College of Medical Technology (CMT)</option>
+              <option>College of Midwifery (CMW)</option>
+              <option>College of Music (COM)</option>
+              <option>College of Nursing (CON)</option>
+              <option>College of Physical Therapy (CPT)</option>
+              <option>College of Respiratory Therapy (CRT)</option>
+              <option>Graduate School</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Visitor Type:</span>
+            <select class="filter-select" id="filter-role" onchange="loadStats()">
+              <option value="">All Visitors</option>
+              <option value="student">Students</option>
+              <option value="employee">Employees (Faculty &amp; Staff)</option>
+            </select>
+          </div>
+          <button class="reset-btn" onclick="resetFilters()">Reset Filters</button>
+        </div>
+
+        <!-- Stat cards -->
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-label">Total Visitors</div>
@@ -76,6 +136,7 @@
             <div class="stat-sub">most common</div>
           </div>
         </div>
+
         <div class="charts-row">
           <div class="chart-card">
             <div class="chart-title">Visitors by College</div>
@@ -88,6 +149,7 @@
         </div>
       </div>
 
+      <!-- LOGS TAB -->
       <div class="tab-panel" id="tab-logs">
         <div style="margin-bottom:1rem;">
           <div class="search-wrap">
@@ -97,13 +159,14 @@
         </div>
         <div class="table-wrap">
           <table class="data-table">
-            <thead><tr><th>Name</th><th>Email</th><th>College</th><th>Course</th><th>Purpose</th><th>Date &amp; Time</th></tr></thead>
+            <thead><tr><th>Name</th><th>Email</th><th>College / Dept</th><th>Course / Position</th><th>Purpose</th><th>Date &amp; Time</th></tr></thead>
             <tbody id="logs-body"></tbody>
           </table>
         </div>
         <div class="pagination" id="logs-pagination"></div>
       </div>
 
+      <!-- USERS TAB -->
       <div class="tab-panel" id="tab-users">
         <div style="margin-bottom:1rem;">
           <div class="search-wrap">
@@ -113,7 +176,7 @@
         </div>
         <div class="table-wrap">
           <table class="data-table">
-            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>College</th><th>Visits</th><th>Status</th><th>Action</th></tr></thead>
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>College / Dept</th><th>Visits</th><th>Status</th><th>Action</th></tr></thead>
             <tbody id="users-body"></tbody>
           </table>
         </div>
@@ -152,9 +215,25 @@ function setFilter(f){
   loadStats();
 }
 
+function resetFilters(){
+  document.getElementById('filter-purpose').value='';
+  document.getElementById('filter-college').value='';
+  document.getElementById('filter-role').value='';
+  loadStats();
+}
+
 async function loadStats(){
+  const purpose = document.getElementById('filter-purpose').value;
+  const college = document.getElementById('filter-college').value;
+  const role    = document.getElementById('filter-role').value;
+
+  let url = '/admin/stats?filter=' + filter;
+  if(purpose) url += '&purpose=' + encodeURIComponent(purpose);
+  if(college) url += '&college=' + encodeURIComponent(college);
+  if(role)    url += '&role='    + encodeURIComponent(role);
+
   try{
-    const{stats}=await API.get('/admin/stats?filter='+filter);
+    const{stats}=await API.get(url);
     document.getElementById('stat-total').textContent=stats.totalVisitors;
     document.getElementById('stat-today').textContent=stats.todayVisits;
     const top=Object.entries(stats.byCollege||{}).sort((a,b)=>b[1]-a[1])[0];
@@ -193,16 +272,16 @@ async function loadLogs(page){
       <tr>
         <td class="td-name">${esc(v.full_name)}</td>
         <td class="td-muted">${esc(v.email)}</td>
-        <td>${shortCollege(v.college)}</td>
+        <td>${esc(v.college||'—')}</td>
         <td>${esc(v.course||'—')}</td>
         <td>${esc(v.purpose)}</td>
         <td class="td-muted">${new Date(v.check_in_time).toLocaleString('en-PH')}</td>
       </tr>`).join(''):`<tr><td colspan="6" class="td-empty">No records found</td></tr>`;
     const pg=document.getElementById('logs-pagination');
     pg.innerHTML=logPages>1?`
-      <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage-1})" ${logPage<=1?'disabled':''}>← Prev</button>
+      <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage-1})" ${logPage<=1?'disabled':''}>Prev</button>
       <span>Page ${logPage} of ${logPages} (${logTotal} records)</span>
-      <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage+1})" ${logPage>=logPages?'disabled':''}>Next →</button>`:'';
+      <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage+1})" ${logPage>=logPages?'disabled':''}>Next</button>`:'';
   }catch(e){console.error(e);}
 }
 
@@ -220,7 +299,7 @@ async function loadUsers(){
         <td class="td-name">${esc(u.fullName)}</td>
         <td class="td-muted">${esc(u.email)}</td>
         <td><span class="badge badge-${u.role}">${u.role}</span></td>
-        <td>${shortCollege(u.college)}</td>
+        <td>${esc(u.college||'—')}</td>
         <td>${u.visitCount}</td>
         <td><span class="badge badge-${u.status}">${u.status}</span></td>
         <td><button class="btn btn-sm ${u.status==='active'?'btn-red':'btn-green'}" onclick="toggleBan('${u.id}')">${u.status==='active'?'Ban':'Unban'}</button></td>
