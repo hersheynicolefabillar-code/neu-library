@@ -429,7 +429,7 @@ select.form-control option { background: #1a3a8c; color: #fff; }
 .search-wrap input::placeholder { color: rgba(255,255,255,0.38); }
 
 /* ── Table ───────────────────────────────────────────────── */
-.table-wrap { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); overflow: hidden; }
+.table-wrap { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); overflow: visible; }
 .data-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
 .data-table thead tr { background: rgba(0,0,0,0.38); }
 .data-table th { padding: 10px 13px; text-align: left; font-size: 0.7rem; font-weight: 700; color: var(--gold); letter-spacing: 0.07em; text-transform: uppercase; white-space: nowrap; }

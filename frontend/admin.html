@@ -27,7 +27,7 @@
     .sidebar-overlay.open{display:block;}
 
     /* Scrollable tables on mobile */
-    .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;display:block;}
 
     /* Mobile bottom nav */
     .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,24,64,0.97);border-top:1px solid rgba(255,255,255,0.12);z-index:50;padding:8px 0 12px;}
@@ -211,9 +211,9 @@
             <input type="text" id="log-search" placeholder="Search by name or email..."/>
           </div>
         </div>
-        <div class="table-scroll">
-          <div class="table-wrap">
-            <table class="data-table" style="min-width:580px;">
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;display:block;">
+  <div class="table-wrap" style="min-width:580px;">
+    <table class="data-table" style="min-width:580px;">
               <thead><tr><th>Name</th><th>Email</th><th>College / Dept</th><th>Course / Position</th><th>Purpose</th><th>Date &amp; Time</th></tr></thead>
               <tbody id="logs-body"></tbody>
             </table>
