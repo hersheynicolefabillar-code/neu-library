@@ -19,7 +19,7 @@
     .reset-btn:hover{background:rgba(255,255,255,0.15);color:#fff;}
 
     /* Mobile hamburger */
-    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;color:#fff;}
+    .hamburger{display:flex;align-items:center;background:none;border:none;cursor:pointer;padding:6px;color:#fff;}
     .hamburger svg{width:24px;height:24px;}
 
     /* Mobile sidebar overlay */
@@ -40,7 +40,6 @@
     @media(max-width:820px){
       .sidebar{position:fixed;left:-240px;top:0;height:100%;z-index:100;transition:left 0.25s;width:240px!important;min-width:240px!important;}
       .sidebar.open{left:0;}
-      .hamburger{display:flex;align-items:center;}
       .mobile-nav{display:block;}
       .admin-content{padding:1rem 0.75rem 80px;}
       .stats-grid{grid-template-columns:repeat(2,1fr)!important;gap:0.75rem;}
@@ -55,6 +54,10 @@
       .stat-value{font-size:1.3rem!important;}
       .chart-card{padding:1rem 0.75rem;}
     }
+    @media(min-width:821px){
+  .hamburger{display:none!important;}
+  .sidebar{position:relative;left:0!important;}
+}
   </style>
 </head>
 <body>
