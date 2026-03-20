@@ -7,36 +7,81 @@
   <link rel="stylesheet" href="css/style.css"/>
   <style>
     body{background:linear-gradient(140deg,#0a1840 0%,#1a3a8c 45%,#0d2158 100%);min-height:100vh;}
+
+    /* Filter styles */
     .filter-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:1.25rem;}
     .filter-select{padding:7px 32px 7px 12px;border-radius:8px;font-size:0.82rem;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.25);background:rgba(0,0,0,0.28);color:rgba(255,255,255,0.85);font-family:'Source Sans 3',sans-serif;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;}
     .filter-select:focus{outline:none;border-color:var(--gold);}
     .filter-select option{background:#1a3a8c;color:#fff;}
     .filter-label{font-size:0.75rem;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;}
-    .filter-group{display:flex;align-items:center;gap:6px;}
+    .filter-group{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
     .reset-btn{padding:7px 14px;border-radius:8px;font-size:0.78rem;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.65);font-family:'Source Sans 3',sans-serif;transition:all 0.15s;}
     .reset-btn:hover{background:rgba(255,255,255,0.15);color:#fff;}
+
+    /* Mobile hamburger */
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;color:#fff;}
+    .hamburger svg{width:24px;height:24px;}
+
+    /* Mobile sidebar overlay */
+    .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99;}
+    .sidebar-overlay.open{display:block;}
+
+    /* Scrollable tables on mobile */
+    .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+    /* Mobile bottom nav */
+    .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,24,64,0.97);border-top:1px solid rgba(255,255,255,0.12);z-index:50;padding:8px 0 12px;}
+    .mobile-nav-items{display:flex;justify-content:space-around;align-items:center;}
+    .mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;border:none;background:none;color:rgba(255,255,255,0.55);cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:0.65rem;font-weight:700;transition:color 0.15s;}
+    .mobile-nav-item svg{width:20px;height:20px;}
+    .mobile-nav-item.active{color:var(--gold);}
+
+    /* Responsive overrides */
+    @media(max-width:820px){
+      .sidebar{position:fixed;left:-240px;top:0;height:100%;z-index:100;transition:left 0.25s;width:240px!important;min-width:240px!important;}
+      .sidebar.open{left:0;}
+      .hamburger{display:flex;align-items:center;}
+      .mobile-nav{display:block;}
+      .admin-content{padding:1rem 0.75rem 80px;}
+      .stats-grid{grid-template-columns:repeat(2,1fr)!important;gap:0.75rem;}
+      .charts-row{grid-template-columns:1fr!important;}
+      .stat-value{font-size:1.5rem!important;}
+      .filter-row{gap:8px;}
+      .filter-select{font-size:0.75rem;padding:6px 28px 6px 10px;}
+      .admin-topbar{padding:0.65rem 1rem;}
+    }
+    @media(max-width:480px){
+      .stats-grid{grid-template-columns:1fr 1fr!important;}
+      .stat-value{font-size:1.3rem!important;}
+      .chart-card{padding:1rem 0.75rem;}
+    }
   </style>
 </head>
 <body>
-<div class="deco3"></div><div class="deco4"></div>
+
+<!-- Sidebar overlay for mobile -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
 <div class="admin-layout">
-  <aside class="sidebar">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <img src="images/neu.png" alt="NEU Logo" class="sidebar-logo"/>
+      <img src="images/neu.png" alt="NEU Logo" class="sidebar-logo"
+           onerror="this.src='https://neu.edu.ph/main/img/neu.png'"/>
       <div class="sidebar-title">NEU Library</div>
       <div class="sidebar-sub">Admin Panel</div>
     </div>
     <nav class="sidebar-nav">
-      <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
+      <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard');closeSidebar();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         Dashboard
       </button>
-      <button class="nav-item" data-tab="logs" onclick="switchTab('logs')">
+      <button class="nav-item" data-tab="logs" onclick="switchTab('logs');closeSidebar();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
         Visitor Logs
       </button>
-      <button class="nav-item" data-tab="users" onclick="switchTab('users')">
+      <button class="nav-item" data-tab="users" onclick="switchTab('users');closeSidebar();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3"/><path d="M6 20v-1a6 6 0 0112 0v1"/></svg>
         User Management
       </button>
@@ -49,24 +94,31 @@
     </div>
   </aside>
 
+  <!-- Main content -->
   <div class="admin-main">
+
+    <!-- Topbar -->
     <div class="admin-topbar">
-      <span class="admin-topbar-title" id="topbar-label">Dashboard</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="hamburger" id="hamburger-btn" onclick="openSidebar()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <span class="admin-topbar-title" id="topbar-label">Dashboard</span>
+      </div>
       <span class="admin-topbar-date" id="topbar-date"></span>
     </div>
+
     <div class="admin-content">
 
       <!-- DASHBOARD TAB -->
       <div class="tab-panel active" id="tab-dashboard">
-
-        <!-- Time filter -->
         <div class="filter-tabs" style="margin-bottom:1rem;">
           <button class="filter-tab active" data-filter="day" onclick="setFilter('day')">Day</button>
           <button class="filter-tab" data-filter="week" onclick="setFilter('week')">Week</button>
           <button class="filter-tab" data-filter="month" onclick="setFilter('month')">Month</button>
         </div>
-
-        <!-- Additional filters row -->
         <div class="filter-row">
           <div class="filter-group">
             <span class="filter-label">Purpose:</span>
@@ -110,10 +162,9 @@
               <option value="employee">Employees (Faculty &amp; Staff)</option>
             </select>
           </div>
-          <button class="reset-btn" onclick="resetFilters()">Reset Filters</button>
+          <button class="reset-btn" onclick="resetFilters()">Reset</button>
         </div>
 
-        <!-- Stat cards -->
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-label">Total Visitors</div>
@@ -157,11 +208,13 @@
             <input type="text" id="log-search" placeholder="Search by name or email..."/>
           </div>
         </div>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead><tr><th>Name</th><th>Email</th><th>College / Dept</th><th>Course / Position</th><th>Purpose</th><th>Date &amp; Time</th></tr></thead>
-            <tbody id="logs-body"></tbody>
-          </table>
+        <div class="table-scroll">
+          <div class="table-wrap">
+            <table class="data-table" style="min-width:580px;">
+              <thead><tr><th>Name</th><th>Email</th><th>College / Dept</th><th>Course / Position</th><th>Purpose</th><th>Date &amp; Time</th></tr></thead>
+              <tbody id="logs-body"></tbody>
+            </table>
+          </div>
         </div>
         <div class="pagination" id="logs-pagination"></div>
       </div>
@@ -174,17 +227,41 @@
             <input type="text" id="user-search" placeholder="Search users..."/>
           </div>
         </div>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>College / Dept</th><th>Visits</th><th>Status</th><th>Action</th></tr></thead>
-            <tbody id="users-body"></tbody>
-          </table>
+        <div class="table-scroll">
+          <div class="table-wrap">
+            <table class="data-table" style="min-width:560px;">
+              <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>College / Dept</th><th>Visits</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
     </div>
   </div>
 </div>
+
+<!-- Mobile bottom navigation -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-items">
+    <button class="mobile-nav-item active" id="mnav-dashboard" onclick="switchTab('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </button>
+    <button class="mobile-nav-item" id="mnav-logs" onclick="switchTab('logs')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+      Logs
+    </button>
+    <button class="mobile-nav-item" id="mnav-users" onclick="switchTab('users')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3"/><path d="M6 20v-1a6 6 0 0112 0v1"/></svg>
+      Users
+    </button>
+    <button class="mobile-nav-item" onclick="Auth.clear();Auth.redirect('index.html');">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"/></svg>
+      Sign Out
+    </button>
+  </div>
+</nav>
 
 <script src="js/app.js"></script>
 <script>
@@ -193,18 +270,31 @@
   if(Auth.getUser()?.role!=='admin'){Auth.redirect('checkin.html');return;}
 })();
 
-document.getElementById('topbar-date').textContent=new Date().toLocaleDateString('en-PH',{dateStyle:'full'});
+document.getElementById('topbar-date').textContent=new Date().toLocaleDateString('en-PH',{dateStyle:'medium'});
 const TAB={dashboard:'Dashboard',logs:'Visitor Logs',users:'User Management'};
+
+function openSidebar(){
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar-overlay').classList.add('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+}
 
 function switchTab(n){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+n).classList.add('active');
   document.querySelectorAll('.nav-item[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===n));
+  document.querySelectorAll('.mobile-nav-item[id]').forEach(b=>b.classList.remove('active'));
+  const mn=document.getElementById('mnav-'+n);
+  if(mn)mn.classList.add('active');
   document.getElementById('topbar-label').textContent=TAB[n];
   if(n==='dashboard')loadStats();
   if(n==='logs')loadLogs(1);
   if(n==='users')loadUsers();
 }
+
 document.getElementById('sidebar-logout').addEventListener('click',()=>{Auth.clear();Auth.redirect('index.html');});
 
 let filter='day';
@@ -223,15 +313,13 @@ function resetFilters(){
 }
 
 async function loadStats(){
-  const purpose = document.getElementById('filter-purpose').value;
-  const college = document.getElementById('filter-college').value;
-  const role    = document.getElementById('filter-role').value;
-
-  let url = '/admin/stats?filter=' + filter;
-  if(purpose) url += '&purpose=' + encodeURIComponent(purpose);
-  if(college) url += '&college=' + encodeURIComponent(college);
-  if(role)    url += '&role='    + encodeURIComponent(role);
-
+  const purpose=document.getElementById('filter-purpose').value;
+  const college=document.getElementById('filter-college').value;
+  const role=document.getElementById('filter-role').value;
+  let url='/admin/stats?filter='+filter;
+  if(purpose)url+='&purpose='+encodeURIComponent(purpose);
+  if(college)url+='&college='+encodeURIComponent(college);
+  if(role)url+='&role='+encodeURIComponent(role);
   try{
     const{stats}=await API.get(url);
     document.getElementById('stat-total').textContent=stats.totalVisitors;
@@ -256,8 +344,7 @@ function renderBars(id,data,gold){
     </div>`).join('');
 }
 
-let logPage=1,logSearch='',logTotal=0,logPages=1;
-let logTimer;
+let logPage=1,logSearch='',logTotal=0,logPages=1,logTimer;
 document.getElementById('log-search').addEventListener('input',function(){
   clearTimeout(logTimer);logTimer=setTimeout(()=>{logSearch=this.value.trim();loadLogs(1);},300);
 });
@@ -280,7 +367,7 @@ async function loadLogs(page){
     const pg=document.getElementById('logs-pagination');
     pg.innerHTML=logPages>1?`
       <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage-1})" ${logPage<=1?'disabled':''}>Prev</button>
-      <span>Page ${logPage} of ${logPages} (${logTotal} records)</span>
+      <span style="font-size:0.8rem;">Page ${logPage} of ${logPages}</span>
       <button class="btn btn-glass btn-sm" onclick="loadLogs(${logPage+1})" ${logPage>=logPages?'disabled':''}>Next</button>`:'';
   }catch(e){console.error(e);}
 }
