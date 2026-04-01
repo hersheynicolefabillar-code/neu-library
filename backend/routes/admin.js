@@ -16,15 +16,19 @@ router.get('/stats', async (req, res) => {
       // Start of today in UTC
       startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())).toISOString();
     } else if (filter === 'week') {
-      // 7 days ago
-      const weekAgo = new Date(now);
-      weekAgo.setDate(weekAgo.getDate() - 7);
-      weekAgo.setHours(0, 0, 0, 0);
-      startDate = weekAgo.toISOString();
+  // Last 14 days
+  const weekAgo = new Date(now);
+  weekAgo.setDate(weekAgo.getDate() - 14);
+  weekAgo.setHours(0, 0, 0, 0);
+  startDate = weekAgo.toISOString();
+}
     } else {
-      // Start of current month
-      startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString();
-    }
+  // Last 30 days
+  const monthAgo = new Date(now);
+  monthAgo.setDate(monthAgo.getDate() - 30);
+  monthAgo.setHours(0, 0, 0, 0);
+  startDate = monthAgo.toISOString();
+}
 
     // Build visits query
     let query = supabase
