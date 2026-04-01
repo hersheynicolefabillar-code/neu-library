@@ -11,15 +11,22 @@ router.get('/stats', async (req, res) => {
     const { filter = 'day', purpose = '', college = '', role = '' } = req.query;
     const now = new Date();
     let startDate;
+
     if (filter === 'day') {
-      startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
+      // Start of today in UTC
+      startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())).toISOString();
     } else if (filter === 'week') {
-      startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
+      // 7 days ago
+      const weekAgo = new Date(now);
+      weekAgo.setDate(weekAgo.getDate() - 7);
+      weekAgo.setHours(0, 0, 0, 0);
+      startDate = weekAgo.toISOString();
     } else {
-      startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+      // Start of current month
+      startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString();
     }
 
-    // Build visits query with filters
+    // Build visits query
     let query = supabase
       .from('visits')
       .select('college, purpose, user_id')
@@ -31,34 +38,35 @@ router.get('/stats', async (req, res) => {
     const { data: visits, error } = await query;
     if (error) return res.status(500).json({ success: false, message: error.message });
 
-    let filteredVisits = visits;
+    let filteredVisits = visits || [];
 
-    // Filter by role (employee = faculty, student = student)
-    if (role) {
+    // Filter by role
+    if (role && filteredVisits.length > 0) {
       const roleFilter = role === 'employee' ? 'faculty' : 'student';
       const userIds = filteredVisits.map(v => v.user_id);
-      if (userIds.length > 0) {
-        const { data: users } = await supabase
-          .from('users')
-          .select('id, role')
-          .in('id', userIds)
-          .eq('role', roleFilter);
-        const allowedIds = new Set((users || []).map(u => u.id));
-        filteredVisits = filteredVisits.filter(v => allowedIds.has(v.user_id));
-      } else {
-        filteredVisits = [];
-      }
+      const { data: users } = await supabase
+        .from('users')
+        .select('id, role')
+        .in('id', userIds)
+        .eq('role', roleFilter);
+      const allowedIds = new Set((users || []).map(u => u.id));
+      filteredVisits = filteredVisits.filter(v => allowedIds.has(v.user_id));
     }
 
     const totalVisitors = filteredVisits.length;
 
     const byCollege = {};
-    filteredVisits.forEach(v => { byCollege[v.college] = (byCollege[v.college] || 0) + 1; });
+    filteredVisits.forEach(v => {
+      if (v.college) byCollege[v.college] = (byCollege[v.college] || 0) + 1;
+    });
 
     const byPurpose = {};
-    filteredVisits.forEach(v => { byPurpose[v.purpose] = (byPurpose[v.purpose] || 0) + 1; });
+    filteredVisits.forEach(v => {
+      if (v.purpose) byPurpose[v.purpose] = (byPurpose[v.purpose] || 0) + 1;
+    });
 
-    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
+    // Today's visits - always use today regardless of filter
+    const todayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())).toISOString();
     const { count: todayVisits } = await supabase
       .from('visits')
       .select('id', { count: 'exact', head: true })
@@ -68,7 +76,14 @@ router.get('/stats', async (req, res) => {
 
     res.json({
       success: true,
-      stats: { totalVisitors, todayVisits: todayVisits || 0, byCollege, byPurpose, topPurpose }
+      stats: {
+        totalVisitors,
+        todayVisits: todayVisits || 0,
+        byCollege,
+        byPurpose,
+        topPurpose,
+        debug: { filter, startDate, totalFound: filteredVisits.length }
+      }
     });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -95,7 +110,13 @@ router.get('/logs', async (req, res) => {
     const { data: visits, error, count } = await query;
     if (error) return res.status(500).json({ success: false, message: error.message });
 
-    res.json({ success: true, visits, total: count, page: pageNum, pages: Math.ceil(count / limitNum) });
+    res.json({
+      success: true,
+      visits: visits || [],
+      total: count || 0,
+      page: pageNum,
+      pages: Math.ceil((count || 0) / limitNum)
+    });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -117,7 +138,7 @@ router.get('/users', async (req, res) => {
     const { data: users, error } = await query;
     if (error) return res.status(500).json({ success: false, message: error.message });
 
-    const usersWithCounts = await Promise.all(users.map(async (u) => {
+    const usersWithCounts = await Promise.all((users || []).map(async (u) => {
       const { count } = await supabase
         .from('visits')
         .select('id', { count: 'exact', head: true })
@@ -144,7 +165,7 @@ router.get('/users', async (req, res) => {
 router.patch('/users/:id/ban', async (req, res) => {
   try {
     const { data: user, error: fetchError } = await supabase
-      .from('users').select('status, full_name').eq('id', req.params.id).single();
+      .from('users').select('status').eq('id', req.params.id).single();
     if (fetchError || !user) return res.status(404).json({ success: false, message: 'User not found' });
 
     const newStatus = user.status === 'active' ? 'banned' : 'active';
